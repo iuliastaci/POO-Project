@@ -88,6 +88,12 @@ public:
     }
 };
 int main() {
+    Airline a1{"BA", "British Airlines"};
+    Reservation rsv1{1, 3, "BA158", "31.10.2022"};
+    Passenger p1{"Maria", "Popescu", "0040755189654", "Bucharest", 31, 20};
+    Flight f1{"Ba158", "31.10.2022", "31.10.2022", "10:00", "13:00", "OTP", "LHR"};
+    std::cout<<a1<<"\n";
+    operator<<(std::cout, a1);
 
     return 0;
 }
