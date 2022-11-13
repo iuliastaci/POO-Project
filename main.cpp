@@ -2,6 +2,7 @@
 #include <utility>
 #include <vector>
 #include <string>
+#include <cctype>
 
 class Passenger {
     std::string first_name;
@@ -16,7 +17,7 @@ public:
         std::cout<< " Constructor explicit de initializare Passenger\n";
     }
     Passenger(){
-        id=++id;
+        ++id;
     }
     friend std::ostream& operator<<(std::ostream& os, const Passenger& pa) {
         os << "Pasagerul " << pa.id << ": " << pa.first_name << " " << pa.last_name << " " <<
@@ -41,7 +42,7 @@ public:
         std::cin>>last_name;
         last_name[0] = toupper(last_name[0]);
         age = verifyAge();
-        std::cout<<"\nAdress ";
+        std::cout<<"\nAddress ";
         std::cin>>address;
         std::cout<<"\nPhone number ";
         std::cin>>phone_number;
@@ -54,6 +55,9 @@ class Airline{
 public:
     explicit Airline(const std::string& IATA_Code, const std::string& Name) : IATA_code{IATA_Code}, name{Name} {
         std::cout<< "Constructor explicit de initializare Airline\n";
+    }
+    Airline(){
+
     }
     Airline(const Airline& other) : IATA_code{other.IATA_code}, name{other.name} {
         std::cout<< "Constructor de copiere Airline\n";
@@ -70,6 +74,12 @@ public:
     friend std::ostream& operator<<(std::ostream& os, const Airline& arl) {
         os << "Compania aeriana " << arl.name << " are codul IATA " << arl.IATA_code << "\n";
         return os;
+    }
+    void read(){
+        std::cout<<"IATA code: ";
+        std::cin>>IATA_code;
+        std::cout<<"\nName: ";
+        std::cin>>name;
     }
 };
 
@@ -98,20 +108,19 @@ public:
     }
     int verifyFlightNo(){
         std::string fln;
-        std::cout<<"Flight number ";
+        std::cout<<"Flight number (*use uppercase letters)";
         std::cin>>fln;
-        fln[0]= toupper(fln[0]);
-        fln[1]= toupper(fln[1]);
-        int ok;
-        ok = 0;
-        if(fln[0]>='A' && fln[0]<='Z' && fln[1]>='A' && fln[1]<='Z')
-            ok=1;
-        for(int i=2; i<5; i++)
-            if(fln[i]<='1'&& fln[i] >='9')
-                ok = 0;
-        if(ok)
-            return 1;
-        return 0;
+
+        if(std::isalpha(fln[0]) && std::isalpha(fln[1]))
+            {
+                for(int i=2; i<5; i++)
+                    if(std::isdigit(fln[i])==0)
+                        return 0;
+                return 1;
+            }
+        else
+            return 0;
+
     }
     void read(){
         std::cout<<"Flight number ";
@@ -138,30 +147,63 @@ public:
 class Reservation{
     int reservation_no;
     int no_of_passengers;
+    float price;
     std::string flight_no;
     std::string departure_date;
     //std::vector<Passenger> passengers;
 public:
-    explicit Reservation(int reservationNo, int noOfPassengers, const std::string& flightNo, const std::string& departureDate) :
-            reservation_no{reservationNo}, no_of_passengers{noOfPassengers}, flight_no{flightNo}, departure_date{departureDate} {
+    explicit Reservation(int reservationNo, int noOfPassengers, float Price, const std::string& flightNo, const std::string& departureDate) :
+            reservation_no{reservationNo}, no_of_passengers{noOfPassengers}, price{Price}, flight_no{flightNo}, departure_date{departureDate} {
         std::cout<< "Constructor explicit de initializare Reservation\n";
     }
     Reservation(){
-        reservation_no = ++reservation_no;
+        ++reservation_no;
     }
     friend std::ostream& operator<<(std::ostream& os, const Reservation& re) {
         os << "Rezervarea " << re.reservation_no << ", " << re.no_of_passengers << " pasageri, zborul " << re.flight_no << " , data "
-           << re.departure_date << "\n";
+           << re.departure_date << "costa " << re.price<<"\n";
         return os;
+    }
+    float discount(){
+        float p;
+        std::cout<<"Price: ";
+        std::cin>>p;
+        if(p>50)
+            p = p - 10/100*p; // 10% discount
+        else if(p>120)
+            p = p - 20/100*p; //20% discount
+        else if(p>300)
+            p = p - 25/100*p; //25% discount
+        return p;
+    }
+    void read(){
+        std::cout<<"Reservation no: "<<reservation_no<<"\n";\
+        std::cout<<"Number of passengers: ";
+        std::cin>>no_of_passengers;
+        std::cout<<"\n";
+        price = discount();
+        std::cout<<"\nPrice after discount: "<<price;
+        std::cout<<"\nFlight no: ";
+        std::cin>>flight_no;
+        std::cout<<"\nDeparture date: ";
+        std::cin>>departure_date;
     }
 };
 int main() {
     Airline a1{"BA", "British Airlines"};
-    Reservation rsv1{1, 3, "BA158", "31.10.2022"};
+    Reservation rsv1{1, 3, 120, "BA158", "31.10.2022"};
     Passenger p1{"Maria", "Popescu", "0040755189654", "Bucharest", 31, 20};
     Flight f1{"BA158", "31.10.2022", "31.10.2022", "10:00", "13:00", "OTP", "LHR"};
     std::cout<<a1<<"\n";
     operator<<(std::cout, a1);
+
+    Airline a2;
+    a2.read();
+    std::cout<<a2<<"\n";
+
+    Reservation rsv2;
+    rsv2.read();
+    std::cout<<rsv2<<"\n";
 
     Passenger p2;
     p2.read();
@@ -170,6 +212,7 @@ int main() {
     Flight f2;
     f2.read();
     std::cout<<f2<<"\n";
+
 
 
     return 0;
