@@ -196,6 +196,9 @@ int main() {
     Flight f1{"BA158", "31.10.2022", "31.10.2022", "10:00", "13:00", "OTP", "LHR"};
     std::cout<<a1<<"\n";
     operator<<(std::cout, a1);
+    std::cout<<rsv1<<"\n";
+    std::cout<<p1<<"\n";
+    std::cout<<f1<<"\n";
 
     Airline a2;
     a2.read();
