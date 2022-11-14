@@ -9,8 +9,8 @@ class Passenger {
     std::string last_name;
     std::string phone_number;
     std::string address;
-    int id;
-    int age;
+    int id=0;
+    int age=0;
 public:
     explicit Passenger(const std::string&  firstName, const std::string& lastName, const std::string& phoneNumber, const std::string& Address, int ID, int Age) : first_name{std::move(firstName)},
                                                                                                                                                                   last_name{lastName}, phone_number{phoneNumber}, address{Address}, id{ID}, age{Age}  {
@@ -25,7 +25,7 @@ public:
         return os;
     }
     int verifyAge(){
-        int y;
+        int y=0;
         std::cout<<"Varsta: ";
         std::cin>>y;
         if(y>=18)
@@ -145,9 +145,9 @@ public:
 };
 
 class Reservation{
-    int reservation_no;
-    int no_of_passengers;
-    float price;
+    int reservation_no=0;
+    int no_of_passengers=0;
+    float price=0;
     std::string flight_no;
     std::string departure_date;
     //std::vector<Passenger> passengers;
@@ -165,7 +165,7 @@ public:
         return os;
     }
     float discount(){
-        float p;
+        float p=0.0;
         std::cout<<"Price: ";
         std::cin>>p;
         if(p>50)
