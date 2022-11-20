@@ -1,9 +1,8 @@
-# OOP Template
+# Rezervari bilete de avion
 
-### Tema 0
+### Scurta descriere
+-[] Acest proiect simuleaza un sistem de rezervari a biletelor de avion, inspirat din platforme precum Vola, ESky, etc. Am implementat functionalitati, de exemplu verificarea varstei pasagerilor astfel incat sa fie majori sau aplicarea unei reduceri, in functie de valoarea totala a rezervarii. Pentru exemple, am folosit numele reale ale companiilor aeriene, codurile IATA (International Air Transport Association) ale acestora si ale aeroporturilor.
 
-- [ ] Nume proiect (îl puteți schimba ulterior)
-- [ ] Scurtă descriere a temei alese, ce v-ați propus să implementați
 
 ## Tema 1
 
