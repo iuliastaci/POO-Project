@@ -56,9 +56,7 @@ public:
     explicit Airline(const std::string& IATA_Code, const std::string& Name) : IATA_code{IATA_Code}, name{Name} {
         std::cout<< "Constructor explicit de initializare Airline\n";
     }
-    Airline(){
-
-    }
+    Airline(){}
     Airline(const Airline& other) : IATA_code{other.IATA_code}, name{other.name} {
         std::cout<< "Constructor de copiere Airline\n";
     }
@@ -84,6 +82,7 @@ public:
 };
 
 class Flight{
+    Airline arl;
     std::string flight_no; //is consisting of IATA_code and 3/4 digits
     std::string departure_date;
     std::string arrival_date;
@@ -92,9 +91,9 @@ class Flight{
     std::string departure_airport;
     std::string arrival_airport;
 public:
-    explicit Flight(const std::string& flightNo, const std::string& departureDate, const std::string& arrivalDate,
+    explicit Flight(Airline& Arl, const std::string& flightNo, const std::string& departureDate, const std::string& arrivalDate,
                     const std::string& departureTime, const std::string& arrivalTime, const std::string& departureAirport,
-                    const std::string& arrivalAirport) : flight_no{flightNo}, departure_date{departureDate}, arrival_date{arrivalDate},
+                    const std::string& arrivalAirport) : arl{Arl}, flight_no{flightNo}, departure_date{departureDate}, arrival_date{arrivalDate},
                                                          departure_time{departureTime}, arrival_time{arrivalTime}, departure_airport{departureAirport}, arrival_airport{arrivalAirport} {
         std::cout<< "Constructor explicit de initializare Flight\n";
     }
@@ -102,7 +101,7 @@ public:
 
     }
     friend std::ostream& operator<<(std::ostream& os, const Flight& fl) {
-        os << "Zborul "<< fl.flight_no << ": DEP " << fl.departure_airport << " " << fl.departure_date <<
+        os << "Compania "<<fl.arl<<"opereaza zborul "<< fl.flight_no << ": DEP " << fl.departure_airport << " " << fl.departure_date <<
            " " << fl.departure_time << " -> ARR " << fl.arrival_airport << " " << fl.arrival_date << " " << fl.arrival_time << "\n";
         return os;
     }
@@ -150,10 +149,10 @@ class Reservation{
     float price=0;
     std::string flight_no;
     std::string departure_date;
-    //std::vector<Passenger> passengers;
+    Passenger passenger;
 public:
-    explicit Reservation(int reservationNo, int noOfPassengers, float Price, const std::string& flightNo, const std::string& departureDate) :
-            reservation_no{reservationNo}, no_of_passengers{noOfPassengers}, price{Price}, flight_no{flightNo}, departure_date{departureDate} {
+    explicit Reservation(int reservationNo, int noOfPassengers, float Price, const std::string& flightNo, const std::string& departureDate, Passenger& Passenger) :
+            reservation_no{reservationNo}, no_of_passengers{noOfPassengers}, price{Price}, flight_no{flightNo}, departure_date{departureDate}, passenger{Passenger} {
         std::cout<< "Constructor explicit de initializare Reservation\n";
     }
     Reservation(){
@@ -191,9 +190,9 @@ public:
 };
 int main() {
     Airline a1{"BA", "British Airlines"};
-    Reservation rsv1{1, 3, 120, "BA158", "31.10.2022"};
     Passenger p1{"Maria", "Popescu", "0040755189654", "Bucharest", 31, 20};
-    Flight f1{"BA158", "31.10.2022", "31.10.2022", "10:00", "13:00", "OTP", "LHR"};
+    Reservation rsv1{1, 3, 120, "BA158", "31.10.2022",p1};
+    Flight f1{a1,"BA158", "31.10.2022", "31.10.2022", "10:00", "13:00", "OTP", "LHR"};
     std::cout<<a1<<"\n";
     operator<<(std::cout, a1);
     std::cout<<rsv1<<"\n";
@@ -204,13 +203,13 @@ int main() {
     a2.read();
     std::cout<<a2<<"\n";
 
-    Reservation rsv2;
-    rsv2.read();
-    std::cout<<rsv2<<"\n";
-
     Passenger p2;
     p2.read();
     std::cout<<p2<<"\n";
+
+    Reservation rsv2;
+    rsv2.read();
+    std::cout<<rsv2<<"\n";
 
     Flight f2;
     f2.read();
