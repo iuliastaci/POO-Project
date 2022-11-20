@@ -10,6 +10,7 @@ class Passenger {
     std::string phone_number;
     std::string address;
     int id=0;
+    static int nextid;
     int age=0;
 public:
     explicit Passenger(const std::string&  firstName, const std::string& lastName, const std::string& phoneNumber, const std::string& Address, int ID, int Age) : first_name{std::move(firstName)},
@@ -17,7 +18,8 @@ public:
         std::cout<< " Constructor explicit de initializare Passenger\n";
     }
     Passenger(){
-        ++id;
+        id = nextid;
+        ++nextid;
     }
     friend std::ostream& operator<<(std::ostream& os, const Passenger& pa) {
         os << "Pasagerul " << pa.id << ": " << pa.first_name << " " << pa.last_name << " " <<
@@ -101,11 +103,11 @@ public:
 
     }
     friend std::ostream& operator<<(std::ostream& os, const Flight& fl) {
-        os << "Compania "<<fl.arl<<"opereaza zborul "<< fl.flight_no << ": DEP " << fl.departure_airport << " " << fl.departure_date <<
+        os <<fl.arl<<"si opereaza zborul "<< fl.flight_no << ": DEP " << fl.departure_airport << " " << fl.departure_date <<
            " " << fl.departure_time << " -> ARR " << fl.arrival_airport << " " << fl.arrival_date << " " << fl.arrival_time << "\n";
         return os;
     }
-    int verifyFlightNo(){
+    int static verifyFlightNo(){
         std::string fln;
         std::cout<<"Flight number (*use uppercase letters)";
         std::cin>>fln;
@@ -145,25 +147,24 @@ public:
 
 class Reservation{
     int reservation_no=0;
-    int no_of_passengers=0;
+    static int nextrsv_no;
     float price=0;
-    std::string flight_no;
-    std::string departure_date;
+    Flight fl;
     Passenger passenger;
 public:
-    explicit Reservation(int reservationNo, int noOfPassengers, float Price, const std::string& flightNo, const std::string& departureDate, Passenger& Passenger) :
-            reservation_no{reservationNo}, no_of_passengers{noOfPassengers}, price{Price}, flight_no{flightNo}, departure_date{departureDate}, passenger{Passenger} {
+    explicit Reservation(int reservationNo, float Price, Flight& Fl, Passenger& Passenger) :
+            reservation_no{reservationNo}, price{Price},fl{Fl}, passenger{Passenger} {
         std::cout<< "Constructor explicit de initializare Reservation\n";
     }
     Reservation(){
-        ++reservation_no;
+        reservation_no = nextrsv_no;
+        ++nextrsv_no;
     }
     friend std::ostream& operator<<(std::ostream& os, const Reservation& re) {
-        os << "Rezervarea " << re.reservation_no << ", " << re.no_of_passengers << " pasageri, zborul " << re.flight_no << " , data "
-           << re.departure_date << "costa " << re.price<<"\n";
+        os << "Rezervarea " << re.reservation_no <<", zborul " << re.fl<<" costa " << re.price<<"euro, "<<re.passenger<<"\n";
         return os;
     }
-    float discount(){
+    float static discount(){
         float p=0.0;
         std::cout<<"Price: ";
         std::cin>>p;
@@ -177,27 +178,27 @@ public:
     }
     void read(){
         std::cout<<"Reservation no: "<<reservation_no<<"\n";\
-        std::cout<<"Number of passengers: ";
-        std::cin>>no_of_passengers;
         std::cout<<"\n";
         price = discount();
         std::cout<<"\nPrice after discount: "<<price;
-        std::cout<<"\nFlight no: ";
-        std::cin>>flight_no;
-        std::cout<<"\nDeparture date: ";
-        std::cin>>departure_date;
+
     }
 };
+
+int Passenger::nextid = 2;
+int Reservation::nextrsv_no = 2;
+
 int main() {
     Airline a1{"BA", "British Airlines"};
-    Passenger p1{"Maria", "Popescu", "0040755189654", "Bucharest", 31, 20};
-    Reservation rsv1{1, 3, 120, "BA158", "31.10.2022",p1};
+    Passenger p1{"Maria", "Popescu", "0040755189654", "Bucharest", 1, 20};
     Flight f1{a1,"BA158", "31.10.2022", "31.10.2022", "10:00", "13:00", "OTP", "LHR"};
+    Reservation rsv1{1, 120, f1,p1};
     std::cout<<a1<<"\n";
     operator<<(std::cout, a1);
     std::cout<<rsv1<<"\n";
     std::cout<<p1<<"\n";
     std::cout<<f1<<"\n";
+
 
     Airline a2;
     a2.read();
