@@ -1,7 +1,7 @@
 # Rezervari bilete de avion
 
 ### Scurta descriere
--[] Acest proiect simuleaza un sistem de rezervari a biletelor de avion, inspirat din platforme precum Vola, ESky, etc. Am implementat functionalitati, de exemplu verificarea varstei pasagerilor astfel incat sa fie majori sau aplicarea unei reduceri, in functie de valoarea totala a rezervarii. Pentru exemple, am folosit numele reale ale companiilor aeriene, codurile IATA (International Air Transport Association) ale acestora si ale aeroporturilor.
+-[ ] Acest proiect simuleaza un sistem de rezervari a biletelor de avion, inspirat din platforme precum Vola, ESky, etc. Am implementat functionalitati, de exemplu verificarea varstei pasagerilor astfel incat sa fie majori sau aplicarea unei reduceri, in functie de valoarea totala a rezervarii. Pentru exemple, am folosit numele reale ale companiilor aeriene, codurile IATA (International Air Transport Association) ale acestora si ale aeroporturilor.
 
 
 ## Tema 1
