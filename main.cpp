@@ -19,13 +19,13 @@ int main() {
 try {
     Passenger p1{"Maria", "Popescu", "0040755189654", "Bucharest", 1, 20};
     Passenger p2{"Ana", "Ionescu", "0040758134654", "Constanta", 2, 31};
-    Passenger p3{"Robert", "Barbu", "0040764231435", "Cluj", 3, 17};
+    //Passenger p3{"Robert", "Barbu", "0040764231435", "Cluj", 3, 17};
     Passenger p4{"Andrei", "Nedelcu", "00407189472", "Bucharest", 4, 18};
     Passenger p5{"Dan", "Alexandru", "0040765324158", "Bucharest", 5, 34};
 
     std::cout << p1 << std::endl;
     std::cout << p2 << std::endl;
-    std::cout << p3 << std::endl;
+    //std::cout << p3 << std::endl;
     std::cout << p4 << std::endl;
     std::cout << p5 << std::endl;
 }

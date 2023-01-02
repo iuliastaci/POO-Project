@@ -19,7 +19,7 @@ public:
     Reservation();
     explicit Reservation(int reservationNo, float Price, std::vector<Flight> Flights, Passenger& Passenger);
     friend std::ostream& operator<<(std::ostream& os, const Reservation& re);
-    float static discount(float p);
+    //float static discount(float p);
 };
 
 

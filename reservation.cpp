@@ -9,7 +9,7 @@ std::ostream& operator<<(std::ostream& os, const Reservation& re) {
     }
     return os;
 }
-float Reservation::discount(float p) {
+/*float Reservation::discount(float p) {
     if(p>50)
         p = p - 10/100*p; // 10% discount
     else if(p>120)
@@ -17,4 +17,4 @@ float Reservation::discount(float p) {
     else if(p>300)
         p = p - 25/100*p; //25% discount
     return p;
-}
+}*/
