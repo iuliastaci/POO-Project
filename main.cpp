@@ -16,6 +16,12 @@ int main() {
     Airline a4{"OS", "Austrian Airlines"};
     Airline a5{"AF", "Air France"};
 
+    std::cout << a1 << std::endl;
+    std::cout << a2 << std::endl;
+    std::cout << a3 << std::endl;
+    std::cout << a4 << std::endl;
+    std::cout << a5 << std::endl;
+
 try {
     Passenger p1{"Maria", "Popescu", "0040755189654", "Bucharest", 1, 20};
     Passenger p2{"Ana", "Ionescu", "0040758134654", "Constanta", 2, 31};
@@ -33,7 +39,7 @@ catch(passenger_error &error){
     std::cout<<error.what()<<std::endl;
 }
 
-    Flight f1{a1,"BA158", "31.10.2022", "31.10.2022", "10:00", "13:00", "OTP", "LHR"};
+    //Flight f1{a1,"BA158", "31.10.2022", "31.10.2022", "10:00", "13:00", "OTP", "LHR"};
     Flight f2{};
     Flight f3{};
     Flight f4{};
