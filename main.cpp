@@ -63,10 +63,10 @@ catch(passenger_error &error){
 
     try{
         Reservation re1(1, 160.0, fl1, p1);
-        Reservation re2(2, 49.0, fl2, p2);
+        //Reservation re2(2, 49.0, fl2, p2);
         Reservation re3(3, 245.0, fl3, p4);
         re1.set_price();
-        re2.set_price();
+        //re2.set_price();
         re3.set_price();
     }
     catch (reservation_error &error) {

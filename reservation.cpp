@@ -18,7 +18,7 @@ std::ostream& operator<<(std::ostream& os, const Reservation& re) {
 void Reservation::set_price(){
     price=discount(price);
 
-};
+}
 
 float Reservation::discount(float p) {
     if(p>50)
