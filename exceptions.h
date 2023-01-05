@@ -15,4 +15,10 @@ public:
     explicit passenger_error(const std::string &message);
 };
 
+//the price of reservation must be greater than 20 euro after discount
+class reservation_error:public error {
+public:
+    explicit reservation_error(const std::string &message);
+};
+
 #endif //EXCEPTIONS_H

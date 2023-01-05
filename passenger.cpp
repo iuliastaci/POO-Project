@@ -15,16 +15,5 @@ std::ostream& operator<<(std::ostream &os, const Passenger &pa) {
        pa.age << " years " << pa.address << " "  << pa.phone_number << "\n";
     return os;
 }
-/* int verifyAge(){
-        int y=0;
-        std::cout<<"Varsta: ";
-        std::cin>>y;
-        if(y>=18)
-            return y;
-        else
-            std::cout<<"This passenger is minor!";
-        return -1;
-    }
-*/
 
 //

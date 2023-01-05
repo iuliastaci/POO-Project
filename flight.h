@@ -6,6 +6,7 @@
 #include <vector>
 #include <string>
 #include <cctype>
+#include <memory>
 #include "airline.h"
 
 class Flight {
@@ -23,6 +24,8 @@ public:
                     const std::string& departureTime, const std::string& arrivalTime, const std::string& departureAirport,
                     const std::string& arrivalAirport);
     friend std::ostream& operator<<(std::ostream& os, const Flight& fl);
+    virtual std::shared_ptr<Flight> clone() const=0;
+    virtual ~Flight();
 
 };
 

@@ -14,6 +14,8 @@ std::ostream& operator<<(std::ostream& os, const Flight& fl) {
        " " << fl.departure_time << " -> ARR " << fl.arrival_airport << " " << fl.arrival_date << " " << fl.arrival_time << "\n";
     return os;
 }
+
+Flight::~Flight() {}
 /*
         int static verifyFlightNo(){
         std::string fln;
