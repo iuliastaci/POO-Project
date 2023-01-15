@@ -29,7 +29,7 @@ public:
     float get_totalprice()const;
     float static discount(float p);
     friend void swap(Reservation &sv1, Reservation &rsv2);
-    void flight_operating_period(Flight *fl);
+    void flight_operating_frequency(Flight *fl);
 };
 
 

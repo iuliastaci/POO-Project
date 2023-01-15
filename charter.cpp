@@ -25,3 +25,10 @@ void Charter::details() {
 void Charter::show(std::ostream &os) const {
     os << "Season: " << season << " Frequency: " << frequency <<"\n";
 }
+
+void Charter::get_frequency() {
+    if(!frequency.compare("weekly"))
+        std::cout<<"\nThis charter flight is operated weekly. ";
+    else if(!frequency.compare("bi-weekly"))
+        std::cout<<"\nThis charter flight is operated two times a week. ";
+}

@@ -53,10 +53,10 @@ void swap(Reservation &rsv1, Reservation &rsv2){
     swap(rsv1.passenger, rsv2.passenger);
 }
 
-void Reservation::flight_operating_period(Flight *fl){
+void Reservation::flight_operating_frequency(Flight *fl){
     if(auto* x = dynamic_cast<Charter*>(fl)) {
         std::cout<<"Succes!\n";
-        x->details();
+        x->get_frequency();
     }
     else
         std::cout<<"Cast unsuccesed\n";

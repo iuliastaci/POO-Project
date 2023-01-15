@@ -19,6 +19,7 @@ int main() {
     Airline a4{"OS", "Austrian Airlines"};
     Airline a5{"AF", "Air France"};
 
+    std::cout << "Airlines: ";
     std::cout << a1 << std::endl;
     std::cout << a2 << std::endl;
     std::cout << a3 << std::endl;
@@ -61,6 +62,10 @@ catch(passenger_error &error){
     auto fl2 = {sch1.clone(), ch2.clone()};
     auto fl3 = {ch3.clone(), sch3.clone(), sch4.clone()};
 
+    ch1.details();
+    ch2.details();
+    sch1.details();
+
     try{
         Reservation re1(1, 160.0, fl1, p1);
         Reservation re2(2, 49.0, fl2, p2);
@@ -75,7 +80,7 @@ catch(passenger_error &error){
 
 
     Reservation r;
-    r.flight_operating_period(&ch1);
+    r.flight_operating_frequency(&ch1);
 
     Reservation re4{4, 185.0, fl1, p1};
     Reservation re5{5, 235.0, fl2, p2};

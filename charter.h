@@ -19,6 +19,7 @@ public:
     std::shared_ptr<Flight> clone() const override;
     void details() override;
     void show(std::ostream &os)const override;
+    void get_frequency();
 
 };
 
