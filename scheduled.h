@@ -16,6 +16,8 @@ public:
               const std::string& departureTime, const std::string& arrivalTime, const std::string& departureAirport,
               const std::string& arrivalAirport, std::string  lowCost);
     std::shared_ptr<Flight> clone() const override;
+    void details() override;
+    void show(std::ostream &os)const override;
 };
 
 

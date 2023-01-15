@@ -25,6 +25,8 @@ public:
                     const std::string& arrivalAirport);
     friend std::ostream& operator<<(std::ostream& os, const Flight& fl);
     virtual std::shared_ptr<Flight> clone() const=0;
+    virtual void details();
+    virtual void show(std::ostream&)const;
     virtual ~Flight();
 
 };

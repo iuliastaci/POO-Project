@@ -12,25 +12,11 @@ Flight::Flight(Airline &Arl, const std::string &flightNo, const std::string &dep
 std::ostream& operator<<(std::ostream& os, const Flight& fl) {
     os <<fl.arl<<"si opereaza zborul "<< fl.flight_no << ": DEP " << fl.departure_airport << " " << fl.departure_date <<
        " " << fl.departure_time << " -> ARR " << fl.arrival_airport << " " << fl.arrival_date << " " << fl.arrival_time << "\n";
+    fl.show(os);
+    os<<"\n";
     return os;
 }
 
+void Flight::details() {}
 Flight::~Flight() {}
-/*
-        int static verifyFlightNo(){
-        std::string fln;
-        std::cout<<"Flight number (*use uppercase letters)";
-        std::cin>>fln;
-
-        if(std::isalpha(fln[0]) && std::isalpha(fln[1]))
-            {
-                for(int i=2; i<5; i++)
-                    if(std::isdigit(fln[i])==0)
-                        return 0;
-                return 1;
-            }
-        else
-            return 0;
-
-    }
- */
+void Flight::show(std::ostream &) const {}

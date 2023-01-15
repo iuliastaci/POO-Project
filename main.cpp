@@ -26,25 +26,25 @@ int main() {
     std::cout << a5 << std::endl;
 
 try {
-    Passenger p1{"Maria", "Popescu", "0040755189654", "Bucharest", 1, 20};
-    Passenger p2{"Ana", "Ionescu", "0040758134654", "Constanta", 2, 31};
-    //Passenger p3{"Robert", "Barbu", "0040764231435", "Cluj", 3, 17};
-    Passenger p4{"Andrei", "Nedelcu", "00407189472", "Bucharest", 4, 18};
-    Passenger p5{"Dan", "Alexandru", "0040765324158", "Bucharest", 5, 34};
+    Passenger p1{"Maria", "Popescu", "0040755189654", "Bucharest", 20};
+    Passenger p2{"Ana", "Ionescu", "0040758134654", "Constanta", 31};
+    //Passenger p3{"Robert", "Barbu", "0040764231435", "Cluj", 17};
+    Passenger p4{"Andrei", "Nedelcu", "00407189472", "Bucharest", 18};
+    Passenger p5{"Dan", "Alexandru", "0040765324158", "Bucharest", 34};
 
-    std::cout << p1 << std::endl;
-    std::cout << p2 << std::endl;
-    //std::cout << p3 << std::endl;
-    std::cout << p4 << std::endl;
-    std::cout << p5 << std::endl;
+    std::cout << p1.get_id() << p1 << std::endl;
+    std::cout << p2.get_id() << p2 << std::endl;
+    //std::cout << p3.get_id()<< p3 << std::endl;
+    std::cout << p4.get_id() << p4 << std::endl;
+    std::cout << p5.get_id() << p5 << std::endl;
 }
 catch(passenger_error &error){
     std::cout<<error.what()<<std::endl;
 }
 
-    Passenger p1{"Maria", "Popescu", "0040755189654", "Bucharest", 1, 20};
-    Passenger p2{"Ana", "Ionescu", "0040758134654", "Constanta", 2, 31};
-    Passenger p4{"Andrei", "Nedelcu", "00407189472", "Bucharest", 4, 18};
+    Passenger p1{"Maria", "Popescu", "0040755189654", "Bucharest", 20};
+    Passenger p2{"Ana", "Ionescu", "0040758134654", "Constanta", 31};
+    Passenger p4{"Andrei", "Nedelcu", "00407189472", "Bucharest", 18};
 
     Scheduled sch1(a1, "BA158", "31.10.2023", "31.10.2023", "10:00", "13:00", "OTP", "LHR", "no");
     Scheduled sch2(a2, "TK743", "15.03.2023", "15.03.2023", "15:15", "16:45", "OTP", "IST", "no");
@@ -63,10 +63,10 @@ catch(passenger_error &error){
 
     try{
         Reservation re1(1, 160.0, fl1, p1);
-        //Reservation re2(2, 49.0, fl2, p2);
+        Reservation re2(2, 49.0, fl2, p2);
         Reservation re3(3, 245.0, fl3, p4);
         re1.set_price();
-        //re2.set_price();
+        re2.set_price();
         re3.set_price();
     }
     catch (reservation_error &error) {
@@ -75,12 +75,14 @@ catch(passenger_error &error){
 
 
     Reservation r;
-    r.dcast(&ch1);
-    r.dcast(&sch3);
+    r.flight_operating_period(&ch1);
 
     Reservation re4{4, 185.0, fl1, p1};
     Reservation re5{5, 235.0, fl2, p2};
-    swap(re4,re5);
+    re4.set_price();
+    re5.set_price();
+    std::cout<<"\nReservation 4 - price: "<<re4.get_totalprice();
+    std::cout<<"\nReservation 5 - price: "<<re5.get_totalprice();
 
 
 

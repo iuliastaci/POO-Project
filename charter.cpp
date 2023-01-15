@@ -13,6 +13,15 @@ Charter::Charter(Airline &Arl, const std::string &flightNo, const std::string &d
 std::shared_ptr<Flight>Charter ::clone() const {
     return std::make_shared<Charter>(*this);
 }
-void Charter::show_cast() {
-    std::cout<<"Charter\n";
+void Charter::details() {
+ if(!season.compare("winter")){
+     std::cout<<"\nThis flight is operated between November and March.";
+     }
+ else if (!season.compare("summer")){
+     std::cout<<"\nThis flight is operated between May and October.";
+ }
+}
+
+void Charter::show(std::ostream &os) const {
+    os << "Season: " << season << " Frequency: " << frequency <<"\n";
 }

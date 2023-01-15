@@ -2,10 +2,10 @@
 #include "reservation.h"
 Reservation::Reservation() {}
 Reservation::Reservation(int reservationNo, float Price, const std::vector<std::shared_ptr<Flight>> &Flights, Passenger &Passenger) : reservation_no{reservationNo}, price{Price}, passenger{Passenger}{
-    for (const auto &flight: Flights)
-        flights.push_back(flight->clone());
     if(price<=50)
         throw reservation_error("Discount is not applicable.");
+    for (const auto &flight: Flights)
+        flights.push_back(flight->clone());
 }
 std::ostream& operator<<(std::ostream& os, const Reservation& re) {
     os << "Rezervarea " << re.reservation_no <<", zborul " << " costa " << re.price<<"euro, "<<re.passenger<<"\n";
@@ -14,12 +14,27 @@ std::ostream& operator<<(std::ostream& os, const Reservation& re) {
     }
     return os;
 }
+Reservation::Reservation(const Reservation &other) {
+    reservation_no = other.reservation_no;
+    price = other.price;
+    for(const auto &fl: other.flights)
+        flights.push_back(fl->clone());
+    passenger = other.passenger;
+}
+
+Reservation& Reservation::operator=(Reservation other) {
+    swap(*this,other);
+    return *this;
+}
 
 void Reservation::set_price(){
     price=discount(price);
 
 }
 
+float Reservation::get_totalprice()const {
+    return price;
+}
 float Reservation::discount(float p) {
     if(p>50)
         p = p - 10/100*p; // 10% discount
@@ -32,22 +47,18 @@ float Reservation::discount(float p) {
 
 void swap(Reservation &rsv1, Reservation &rsv2){
     using std::swap;
+    swap(rsv1.reservation_no, rsv2.reservation_no);
+    swap(rsv1.price, rsv2.price);
     swap(rsv1.flights, rsv2.flights);
+    swap(rsv1.passenger, rsv2.passenger);
 }
 
-void Reservation::dcast(Flight *fl){
+void Reservation::flight_operating_period(Flight *fl){
     if(auto* x = dynamic_cast<Charter*>(fl)) {
         std::cout<<"Succes!\n";
-        x->show_cast();
+        x->details();
     }
     else
         std::cout<<"Cast unsuccesed\n";
-    try{
-        auto& x = dynamic_cast<Charter&>(*fl);
-        std::cout<<"Succes!\n";
-        x.show_cast();
-    }
-    catch(std::bad_cast& error) {
-        std::cout<<"Dynamic cast error!\n"<<error.what();
-    }
+
 }
